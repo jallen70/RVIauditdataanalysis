@@ -22,6 +22,7 @@ colnames(num_tested) <- c("Directorate", "num_tested1516", "num_tested1617", "nu
 #num_tested[,1] <- NULL
 #num_tested[1,] <- NULL
 
+
 # plot numbers tested each year
 
 g <- plot_ly(num_tested, x = ~Directorate, y  = ~num_tested1516, type = 'bar', name = '15/16') %>%
@@ -50,6 +51,30 @@ g <- plot_ly(percent_pos, x = ~Directorate, y  = ~percent_pos1516, type = 'bar',
   layout(yaxis = list(title = 'Count'), barmode = 'group', title = "Percentage positive")
 g
 
+
+# % of patients who do not get a result
+# first calculate percentage with insufficient sample 
+percent_nottested <- cbind.data.frame(combined_years$Directorate, (combined_years$No..sent.x - combined_years$No..tested.x)/combined_years$No..sent.x,
+                                (combined_years$No..sent.y - combined_years$No..tested.y)/combined_years$No..sent.y,
+                                (combined_years$No..sent - combined_years$No..tested)/combined_years$No..sent)
+colnames(percent_nottested) <- c("Directorate", "percent_nottested1516", "percent_nottested1617", "percent_nottested1718")
+
+g <- plot_ly(percent_nottested, x = ~Directorate, y  = ~percent_nottested1516, type = 'bar', name = '15/16') %>%
+  add_trace(y = ~percent_nottested1617, name = '16/17') %>%
+  add_trace(y = ~percent_nottested1718, name = '17/18') %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'group', title = "Percentage not tested (reason not given) ")
+g
+
+percent_insuff <- cbind.data.frame(combined_years$Directorate, combined_years$INSUFF.x/combined_years$No..sent.x,
+                                   combined_years$INSUFF.y/combined_years$No..sent.y,
+                                   combined_years$INSUFF/combined_years$No..sent)
+colnames(percent_insuff) <- c("Directorate", "percent_insuff1516", "percent_insuff1617", "percent_insuff1718")
+
+g <- plot_ly(percent_insuff, x = ~Directorate, y  = ~percent_insuff1516, type = 'bar', name = '15/16') %>%
+  add_trace(y = ~percent_insuff1617, name = '16/17') %>%
+  add_trace(y = ~percent_insuff1718, name = '17/18') %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'group', title = "Percentage not tested (insufficient sample)")
+g
 
 
 

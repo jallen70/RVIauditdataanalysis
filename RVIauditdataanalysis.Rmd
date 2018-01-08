@@ -19,7 +19,7 @@ source("analysis.R")
 g <- plot_ly(num_tested, x = ~Directorate, y  = ~num_tested1516, type = 'bar', name = '15/16') %>%
   add_trace(y = ~num_tested1617, name = '16/17') %>%
   add_trace(y = ~num_tested1718, name = '17/18') %>%
-  layout(yaxis = list(title = 'Count'), barmode = 'group', title = "Number tested")
+  layout(yaxis = list(title = 'Count'), barmode = 'group', title = "Number of samples tested for C. diff")
 g
 ```
 
@@ -31,7 +31,7 @@ You can also embed plots, for example:
 g <- plot_ly(percent_carry, x = ~Directorate, y  = ~percent_carry1516, type = 'bar', name = '15/16') %>%
   add_trace(y = ~percent_carry1617, name = '16/17') %>%
   add_trace(y = ~percent_carry1718, name = '17/18') %>%
-  layout(yaxis = list(title = 'Count'), barmode = 'group', title = "Percentage carriers")
+  layout(yaxis = list(title = 'Percentage carriers'), barmode = 'group', title = "Percentage of samples which tested positive for C. diff carriage")
 g
 
 ```
@@ -40,6 +40,23 @@ g
 g <- plot_ly(percent_pos, x = ~Directorate, y  = ~percent_pos1516, type = 'bar', name = '15/16') %>%
   add_trace(y = ~percent_pos1617, name = '16/17') %>%
   add_trace(y = ~percent_pos1718, name = '17/18') %>%
-  layout(yaxis = list(title = 'Count'), barmode = 'group', title = "Percentage positive")
+  layout(yaxis = list(title = 'Percentage positive'), barmode = 'group', title = "Percentage of samples which tested positive for C. diff infection")
 g
+```
+
+```{r echo=FALSE}
+g <- plot_ly(percent_nottested, x = ~Directorate, y  = ~percent_nottested1516, type = 'bar', name = '15/16') %>%
+  add_trace(y = ~percent_nottested1617, name = '16/17') %>%
+  add_trace(y = ~percent_nottested1718, name = '17/18') %>%
+  layout(yaxis = list(title = 'Percentage not tested'), barmode = 'group', title = "Percentage of samples sent for testing which were not tested (reason not given) ")
+g
+```
+
+```{r echo=FALSE}
+g <- plot_ly(percent_insuff, x = ~Directorate, y  = ~percent_insuff1516, type = 'bar', name = '15/16') %>%
+  add_trace(y = ~percent_insuff1617, name = '16/17') %>%
+  add_trace(y = ~percent_insuff1718, name = '17/18') %>%
+  layout(yaxis = list(title = 'Percentage not tested'), barmode = 'group', title = "Percentage of samples sent for testing which were not tested due to an insufficient sample")
+g
+
 ```
